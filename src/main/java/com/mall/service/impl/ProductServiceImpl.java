@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 产品接口service接口实现
  * @author dhf
  */
 @Service("IProductService")

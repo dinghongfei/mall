@@ -6,6 +6,7 @@ import com.mall.pojo.Product;
 import com.mall.vo.ProductDetailVo;
 
 /**
+ * 产品接口service
  * @author dhf
  */
 public interface IProductService {

@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
+ * 后台产品管理controller
  * @author dhf
  */
 @Controller
@@ -40,9 +41,9 @@ public class ProductManageController {
 
     /**
      * 新增产品
-     * @param session
-     * @param product
-     * @return
+     * @param session   session
+     * @param product   产品
+     * @return          ServerResponse
      */
     @RequestMapping(value = "save.do",method = RequestMethod.POST)
     @ResponseBody
@@ -60,10 +61,10 @@ public class ProductManageController {
 
     /**
      * 修改商品售卖状态,即商品上下架
-     * @param session
-     * @param productId
-     * @param status
-     * @return
+     * @param session   session
+     * @param productId 产品id
+     * @param status    产品状态
+     * @return          ServerResponse
      */
     @RequestMapping(value = "set_sale_status.do",method = RequestMethod.POST)
     @ResponseBody
@@ -81,9 +82,9 @@ public class ProductManageController {
 
     /**
      * 获取产品详情
-     * @param session
-     * @param productId
-     * @return
+     * @param session   session
+     * @param productId 产品id
+     * @return          ServerResponse
      */
     @RequestMapping(value = "detail.do",method = RequestMethod.POST)
     @ResponseBody
@@ -101,10 +102,10 @@ public class ProductManageController {
 
     /**
      * 获取产品列表
-     * @param session
-     * @param pageNum
-     * @param pageSize
-     * @return
+     * @param session   session
+     * @param pageNum   页数，即第几页
+     * @param pageSize  每页的数据的条数
+     * @return          ServerResponse
      */
     @RequestMapping(value = "list.do",method = RequestMethod.POST)
     @ResponseBody
@@ -123,12 +124,12 @@ public class ProductManageController {
 
     /**
      * 搜索产品，根据产品名字或者产品id
-     * @param session
-     * @param productName
-     * @param productId
-     * @param pageNum
-     * @param pageSize
-     * @return
+     * @param session       session
+     * @param productName   产品名称
+     * @param productId     产品id
+     * @param pageNum       页数
+     * @param pageSize      每页条数
+     * @return              ServerResponse
      */
     @RequestMapping(value = "search.do",method = RequestMethod.POST)
     @ResponseBody
@@ -147,9 +148,9 @@ public class ProductManageController {
 
     /**
      * 前台上传图片文件
-     * @param file
-     * @param request
-     * @return
+     * @param file      文件
+     * @param request   request
+     * @return          ServerResponse
      */
     @RequestMapping(value = "upload.do",method = RequestMethod.POST)
     @ResponseBody
@@ -177,9 +178,9 @@ public class ProductManageController {
 
     /**
      * 富文本上传图片文件
-     * @param file
-     * @param request
-     * @return
+     * @param file      file
+     * @param request   request
+     * @return          ServerResponse
      */
     @RequestMapping(value = "richtext_img_upload.do",method = RequestMethod.POST)
     @ResponseBody

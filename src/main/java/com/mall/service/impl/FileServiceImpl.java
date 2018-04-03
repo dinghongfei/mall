@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
+ * 附件上传service接口实现
  * @author dhf
  */
 @Service("iFileService")

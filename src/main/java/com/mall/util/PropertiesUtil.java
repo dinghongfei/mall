@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 /**
- *
+ * properties文件处理工具类
  * @author dhf
  */
 public class PropertiesUtil {
