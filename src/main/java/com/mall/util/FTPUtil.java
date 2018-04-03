@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * FTP文件上传处理工具类
  * @author dhf
  */
 public class FTPUtil {

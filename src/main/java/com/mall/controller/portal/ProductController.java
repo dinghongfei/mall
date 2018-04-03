@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 前台产品controller
  * @author dhf
  */
 @Controller
@@ -21,6 +22,11 @@ public class ProductController {
     @Autowired
     private IProductService iProductService;
 
+    /**
+     * 产品详情
+     * @param productId 产品id
+     * @return          ServerResponse
+     */
     @RequestMapping(value = "detail.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<ProductDetailVo> detail(Integer productId){
@@ -28,6 +34,15 @@ public class ProductController {
     }
 
 
+    /**
+     * 产品搜索
+     * @param keyword       关键词
+     * @param categoryId    分类id
+     * @param pageNum       页数
+     * @param pageSize      每页条数
+     * @param orderBy       排序规则
+     * @return              ServerResponse
+     */
     @RequestMapping(value = "list.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<PageInfo> list(@RequestParam(value = "keyword",required = false)String keyword,

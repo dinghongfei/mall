@@ -3,6 +3,7 @@ package com.mall.vo;
 import java.math.BigDecimal;
 
 /**
+ * 产品详情vo
  * @author dhf
  */
 public class ProductDetailVo {

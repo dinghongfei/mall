@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
+ * 产品列表vo
  * @author dhf
  */
 public class ProductListVo {
