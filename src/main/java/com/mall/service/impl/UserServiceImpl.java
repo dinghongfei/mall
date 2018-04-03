@@ -18,7 +18,7 @@ import java.util.UUID;
  *@author dhf
  */
 @Service("iUserService")
-public class IUserServiceImpl implements IUserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -179,5 +179,21 @@ public class IUserServiceImpl implements IUserService {
         }
         user.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySuccess(user);
+    }
+
+
+    /**
+     * 校验是否为管理员
+     * @param user
+     * @return
+     */
+    //backend
+    @Override
+    public ServerResponse checkAdminRole(User user) {
+
+        if (user != null && user.getRole().intValue() == Const.Role.ROLE_ADMIN) {
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByError();
     }
 }
