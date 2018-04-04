@@ -189,7 +189,7 @@ public class ProductServiceImpl implements IProductService {
             return ServerResponse.createByErrorMessage("产品已下架或者删除");
         }
         //pojo-->>VO(value object) 这里用这个
-        //pojo-->>BO(bussiness object)-->>BO(view object)
+        //pojo-->>BO(business object)-->>BO(view object)
         ProductDetailVo productDetailVo = assembleProductDetailVo(product);
 
         return ServerResponse.createBySuccess(productDetailVo);
