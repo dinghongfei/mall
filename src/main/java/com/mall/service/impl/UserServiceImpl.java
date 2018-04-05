@@ -30,7 +30,6 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByErrorMessage("用户名不存在");
         }
 
-        //todo 密码登录MD5
         String md5Password = MD5Util.MD5EncodeUtf8(password);
         User user = userMapper.selectLogin(username, md5Password);
         if (user == null) {
@@ -184,8 +183,8 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 校验是否为管理员
-     * @param user
-     * @return
+     * @param user  当前用户
+     * @return      校验结果
      */
     //backend
     @Override
