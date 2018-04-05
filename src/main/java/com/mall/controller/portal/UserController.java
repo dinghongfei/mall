@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * @author dhf
  */
 @Controller
-@RequestMapping("/user/")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
