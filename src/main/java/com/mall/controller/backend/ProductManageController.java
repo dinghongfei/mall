@@ -220,24 +220,4 @@ public class ProductManageController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

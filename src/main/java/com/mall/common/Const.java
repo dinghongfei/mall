@@ -10,21 +10,44 @@ import java.util.Set;
  */
 public class Const {
 
+    //用于当前用户存取于session中时使用
     public static final String CURRENT_USER = "currentUser";
 
+    //用于验证用户名和email是否有效
     public static final String EMAIL = "email";
     public static final String USERNAME = "username";
 
-
-    public interface ProductListOrderBy{
-        Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc","price_asc");
-    }
-
+    /**
+     * 用户角色代码
+     */
     public interface Role {
         int ROLE_CUSTOMER = 0;
         int ROLE_ADMIN = 1;
     }
 
+    /**
+     * 购物车相关属性
+     */
+    public interface Cart{
+        int CHECKED = 1;    //购物车选中
+        int UN_CHECKED = 0; //未选中
+
+        String LIMIT_NUM_FAIL = "LIMIT_NUM_FAIL";//产品数量超出库存
+        String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";
+    }
+
+
+    /**
+     * 产品排序规则
+     */
+    public interface ProductListOrderBy{
+        Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc","price_asc");
+    }
+
+
+    /**
+     * 产品在售状态
+     */
     public enum ProductStatusEnum{
         ON_SALE(1,"在线");
 
