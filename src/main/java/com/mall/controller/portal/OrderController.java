@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
+ * 订单模块controller
  * @author dhf
  */
 @Controller
@@ -34,6 +35,13 @@ public class OrderController {
     @Autowired
     private IOrderService iOrderService;
 
+    /**
+     * 付款
+     * @param session   session
+     * @param orderNo   订单号
+     * @param request   request
+     * @return          ServerResponse
+     */
     @RequestMapping(value = "pay.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse pay(HttpSession session, Long orderNo, HttpServletRequest request){
@@ -45,6 +53,11 @@ public class OrderController {
         return iOrderService.pay(orderNo, user.getId(), path);
     }
 
+    /**
+     * 支付宝回调
+     * @param request   request
+     * @return          ServerResponse
+     */
     @RequestMapping("alipay_callback.do")
     @ResponseBody
     public Object alipayCllback(HttpServletRequest request){
@@ -86,6 +99,12 @@ public class OrderController {
     }
 
 
+    /**
+     * 订单支付状态查询
+     * @param session   session
+     * @param orderNo   订单号
+     * @return          ServerResponse
+     */
     @RequestMapping(value = "query_order_pay_status.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<Boolean> queryOrderPayStatus(HttpSession session, Long orderNo){

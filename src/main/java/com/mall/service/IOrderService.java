@@ -5,6 +5,7 @@ import com.mall.common.ServerResponse;
 import java.util.Map;
 
 /**
+ * 订单service接口
  * @author dhf
  */
 public interface IOrderService {

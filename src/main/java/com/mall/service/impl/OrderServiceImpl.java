@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 订单service实现
  * @author dhf
  */
 @Service("iOrderService")
@@ -182,8 +183,7 @@ public class OrderServiceImpl implements IOrderService {
         if (response != null) {
             logger.info(String.format("code:%s, msg:%s", response.getCode(), response.getMsg()));
             if (StringUtils.isNotEmpty(response.getSubCode())) {
-                logger.info(String.format("subCode:%s, subMsg:%s", response.getSubCode(),
-                        response.getSubMsg()));
+                logger.info(String.format("subCode:%s, subMsg:%s", response.getSubCode(), response.getSubMsg()));
             }
             logger.info("body:" + response.getBody());
         }
