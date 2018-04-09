@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 订单信息vo
  * @author dhf
  */
 public class OrderVo {

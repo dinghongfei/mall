@@ -145,6 +145,9 @@ public class Const {
         }
     }
 
+    /**
+     * 支付方式
+     */
     public enum PaymentTypeEnum{
         ONLINE_PAY(1,"在线支付");
 

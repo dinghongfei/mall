@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
+ * 未成订单的产品组合成的订单vo（预下单）
  * @author dhf
  */
 public class OrderProductVo {

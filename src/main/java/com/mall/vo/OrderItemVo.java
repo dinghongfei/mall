@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
+ * 订单内单个商品的详情信息
  * @author dhf
  */
 public class OrderItemVo {

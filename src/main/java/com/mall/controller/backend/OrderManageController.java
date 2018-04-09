@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
+ * 后台订单管理controller
  * @author dhf
  */
 @Controller
@@ -29,6 +30,13 @@ public class OrderManageController {
     @Autowired
     private IOrderService iOrderService;
 
+    /**
+     * 订单列表
+     * @param session   session
+     * @param pageNum   页数
+     * @param pageSize  每页数量
+     * @return          ServerResponse
+     */
     @RequestMapping(value = "list.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<PageInfo> list(HttpSession session,
@@ -45,6 +53,12 @@ public class OrderManageController {
         }
     }
 
+    /**
+     * 订单详情
+     * @param session   session
+     * @param orderNo   订单号
+     * @return          ServerResponse
+     */
     @RequestMapping(value = "detail.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<OrderVo> orderDetail(HttpSession session, Long orderNo){
@@ -59,6 +73,14 @@ public class OrderManageController {
         }
     }
 
+    /**
+     * 订单查询
+     * @param session   session
+     * @param orderNo   订单号
+     * @param pageNum   页数
+     * @param pageSize  每页数量
+     * @return
+     */
     @RequestMapping(value = "search.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<PageInfo> orderSearch(HttpSession session, Long orderNo,
@@ -75,6 +97,12 @@ public class OrderManageController {
         }
     }
 
+    /**
+     * 发货
+     * @param session   session
+     * @param orderNo   订单号
+     * @return          ServerResponse
+     */
     @RequestMapping(value = "send_goods.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> orderSendGoods(HttpSession session, Long orderNo){

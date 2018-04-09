@@ -99,6 +99,13 @@ public class OrderController {
         return iOrderService.getOrderDetail(user.getId(), orderNo);
     }
 
+    /**
+     * 订单列表
+     * @param session   session
+     * @param pageNum   页数
+     * @param pageSize  每页数量
+     * @return          ServerResponse
+     */
     @RequestMapping(value = "list.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse list(HttpSession session,
