@@ -29,19 +29,12 @@ public class DateTimeUtil {
         return dateTime.toString(formatStr);
     }
 
-
     public static Date strToDate(String dateTimeStr) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(STANDARD_FORMAT);
-        DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);
-        return dateTime.toDate();
+        return strToDate(dateTimeStr, STANDARD_FORMAT);
     }
 
     public static String dateToStr(Date date){
-        if (date == null) {
-            return StringUtils.EMPTY;
-        }
-        DateTime dateTime = new DateTime(date);
-        return dateTime.toString(STANDARD_FORMAT);
+        return dateToStr(date, STANDARD_FORMAT);
     }
 
 
