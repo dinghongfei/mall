@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * @author dhf
  */
 public class TokenCache {
-    private static Logger logger = LoggerFactory.getLogger(TokenCache.class);
+    private static final Logger logger = LoggerFactory.getLogger(TokenCache.class);
 
     public static final String TOKEN_PREFIX = "token_";
 
