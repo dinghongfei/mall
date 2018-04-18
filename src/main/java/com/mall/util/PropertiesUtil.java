@@ -42,6 +42,38 @@ public class PropertiesUtil {
         return value.trim();
     }
 
+    public static Integer getIntegerPropertry(String key){
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            return null;
+        }
+        return Integer.valueOf(value.trim());
+    }
+    public static Integer getIntegerPropertry(String key,Integer defaultValue){
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            return defaultValue;
+        }
+        return Integer.valueOf(value.trim());
+    }
+
+    public static Boolean getBooleanPropertry(String key){
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            return null;
+        }
+        return Boolean.valueOf(value.trim());
+    }
+    public static Boolean getBooleanPropertry(String key,Boolean defaultValue){
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            return defaultValue;
+        }
+        return Boolean.valueOf(value.trim());
+    }
+
+
+
 
 
 }

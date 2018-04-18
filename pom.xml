@@ -245,6 +245,7 @@
       <version>2.9.0</version>
     </dependency>
 
+    <!-- 二期 -->
     <dependency>
       <groupId>redis.clients</groupId>
       <artifactId>jedis</artifactId>
