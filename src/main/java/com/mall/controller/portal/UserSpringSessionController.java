@@ -1,7 +1,6 @@
 package com.mall.controller.portal;
 
 import com.mall.common.Const;
-import com.mall.common.ResponseCode;
 import com.mall.common.ServerResponse;
 import com.mall.pojo.User;
 import com.mall.service.IUserService;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpSession;
  * @author dhf
  */
 @Controller
-@RequestMapping("/user/springsession")
+@RequestMapping("/user")
 public class UserSpringSessionController {
 
     @Autowired
@@ -53,28 +52,6 @@ public class UserSpringSessionController {
         return ServerResponse.createBySuccess();
     }
 
-    /**
-     * 用户注册
-     * @param user  用户名
-     * @return      ServerResponse
-     */
-    @RequestMapping(value = "register.do",method = RequestMethod.POST)
-    @ResponseBody
-    public ServerResponse<String> register(User user){
-        return iUserService.register(user);
-    }
-
-    /**
-     * 用户名和email校验
-     * @param str   要检查的内容
-     * @param type  类型
-     * @return      ServerResponse
-     */
-    @RequestMapping(value = "check_valid.do",method = RequestMethod.POST)
-    @ResponseBody
-    public ServerResponse<String> checkValid(String str,String type){
-        return iUserService.checkValid(str, type);
-    }
 
     /**
      * 获取用户信息
@@ -90,10 +67,6 @@ public class UserSpringSessionController {
         }
         return ServerResponse.createByErrorMessage("用户未登录，无法获取信息");
     }
-
-
-
-
 
 
 }
