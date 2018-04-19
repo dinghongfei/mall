@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * redis分布式连接池(这里可以称做集群)
  * @author dhf
  */
 public class RedisShardedPool {

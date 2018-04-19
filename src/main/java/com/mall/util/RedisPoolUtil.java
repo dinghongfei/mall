@@ -1,10 +1,13 @@
 package com.mall.util;
 
 import com.mall.common.RedisPool;
+import com.mall.common.RedisShardedPool;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.ShardedJedis;
 
 /**
+ * redis工具类
  * @author dhf
  */
 @Slf4j

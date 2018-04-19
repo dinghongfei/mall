@@ -1,12 +1,11 @@
 package com.mall.util;
 
 import com.mall.common.RedisShardedPool;
-import com.mall.common.RedisShardedPool;
 import lombok.extern.slf4j.Slf4j;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.ShardedJedis;
 
 /**
+ * redis分布式工具类
  * @author dhf
  */
 @Slf4j
@@ -129,6 +128,7 @@ public class RedisShardedPoolUtil {
         System.out.println(RedisShardedPoolUtil.del("keytest"));
 
     }
+
 
 
 
