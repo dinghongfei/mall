@@ -14,10 +14,11 @@ import javax.servlet.http.HttpSession;
 
 /**
  * 前台用户controller层
+ * 用spring-session来实现单点登陆
  * @author dhf
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user/springsession")
 public class UserSpringSessionController {
 
     @Autowired
@@ -30,7 +31,7 @@ public class UserSpringSessionController {
      * @param session   session
      * @return          ServerResponse
      */
-    @RequestMapping(value = "login.do",method = RequestMethod.POST)
+    @RequestMapping(value = "login.do",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
         ServerResponse<User> response = iUserService.login(username, password);
@@ -45,7 +46,7 @@ public class UserSpringSessionController {
      * @param session   session
      * @return          ServerResponse
      */
-    @RequestMapping(value = "logout.do",method = RequestMethod.POST)
+    @RequestMapping(value = "logout.do",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<String> logout(HttpSession session){
         session.removeAttribute(Const.CURRENT_USER);
@@ -58,7 +59,7 @@ public class UserSpringSessionController {
      * @param session   session
      * @return          ServerResponse
      */
-    @RequestMapping(value = "get_user_info.do",method = RequestMethod.POST)
+    @RequestMapping(value = "get_user_info.do",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<User> getUsrInfo(HttpSession session){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
