@@ -4,12 +4,10 @@ import com.github.pagehelper.PageInfo;
 import com.mall.common.ServerResponse;
 import com.mall.service.IProductService;
 import com.mall.vo.ProductDetailVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 前台产品controller
@@ -30,6 +28,12 @@ public class ProductController {
     @RequestMapping(value = "detail.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<ProductDetailVo> detail(Integer productId){
+        return iProductService.getProductDetail(productId);
+    }
+
+    @RequestMapping(value = "/{productId}",method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse<ProductDetailVo> detailRESTful(@PathVariable Integer productId){
         return iProductService.getProductDetail(productId);
     }
 
@@ -55,6 +59,138 @@ public class ProductController {
     }
 
 
+    //http://www.dhf.com/product/手机/100012/1/10/price_asc
+    @RequestMapping(value = "/{keyword}/{categoryId}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse<PageInfo> listRESTful(@PathVariable(value = "keyword")String keyword,
+                                                @PathVariable(value = "categoryId") Integer categoryId,
+                                                @PathVariable(value = "pageNum")Integer pageNum,
+                                                @PathVariable(value = "pageSize") Integer pageSize,
+                                                @PathVariable(value = "orderBy")String orderBy) {
+
+        if(pageNum == null){
+            pageNum = 1;
+        }
+        if(pageSize == null){
+            pageSize = 10;
+        }
+        if(StringUtils.isBlank(orderBy)){
+            orderBy = "price_asc";
+        }
+
+        return iProductService.getProductByKeywordCategory(keyword, categoryId, pageNum, pageSize, orderBy);
+    }
+
+
+    //http://www.dhf.com/product/100012/1/10/price_asc
+    @RequestMapping(value = "/{categoryId}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse<PageInfo> listRESTfulBadcase(@PathVariable(value = "categoryId") Integer categoryId,
+                                                       @PathVariable(value = "pageNum")Integer pageNum,
+                                                       @PathVariable(value = "pageSize") Integer pageSize,
+                                                       @PathVariable(value = "orderBy")String orderBy) {
+
+        if(pageNum == null){
+            pageNum = 1;
+        }
+        if(pageSize == null){
+            pageSize = 10;
+        }
+        if(StringUtils.isBlank(orderBy)){
+            orderBy = "price_asc";
+        }
+
+        return iProductService.getProductByKeywordCategory("", categoryId, pageNum, pageSize, orderBy);
+    }
+
+    //http://www.dhf.com/product/手机/1/10/price_asc
+    @RequestMapping(value = "/{keyword}/{categoryId}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse<PageInfo> listRESTfulBadcase(@PathVariable(value = "keyword")String keyword,
+                                                       @PathVariable(value = "pageNum")Integer pageNum,
+                                                       @PathVariable(value = "pageSize") Integer pageSize,
+                                                       @PathVariable(value = "orderBy")String orderBy) {
+
+        if(pageNum == null){
+            pageNum = 1;
+        }
+        if(pageSize == null){
+            pageSize = 10;
+        }
+        if(StringUtils.isBlank(orderBy)){
+            orderBy = "price_asc";
+        }
+
+        return iProductService.getProductByKeywordCategory(keyword, null, pageNum, pageSize, orderBy);
+    }
+
+
+    //http://www.dhf.com/product/categoryId/100012/1/10/price_asc
+    @RequestMapping(value = "/categoryId/{categoryId}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse<PageInfo> listRESTful(@PathVariable(value = "categoryId") Integer categoryId,
+                                                @PathVariable(value = "pageNum")Integer pageNum,
+                                                @PathVariable(value = "pageSize") Integer pageSize,
+                                                @PathVariable(value = "orderBy")String orderBy) {
+
+        if(pageNum == null){
+            pageNum = 1;
+        }
+        if(pageSize == null){
+            pageSize = 10;
+        }
+        if(StringUtils.isBlank(orderBy)){
+            orderBy = "price_asc";
+        }
+
+        return iProductService.getProductByKeywordCategory("", categoryId, pageNum, pageSize, orderBy);
+    }
+
+    //http://www.dhf.com/product/keyword/手机/1/10/price_asc
+    @RequestMapping(value = "/keyword/{keyword}/{categoryId}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse<PageInfo> listRESTful(@PathVariable(value = "keyword")String keyword,
+                                                @PathVariable(value = "pageNum")Integer pageNum,
+                                                @PathVariable(value = "pageSize") Integer pageSize,
+                                                @PathVariable(value = "orderBy")String orderBy) {
+
+        if(pageNum == null){
+            pageNum = 1;
+        }
+        if(pageSize == null){
+            pageSize = 10;
+        }
+        if(StringUtils.isBlank(orderBy)){
+            orderBy = "price_asc";
+        }
+
+        return iProductService.getProductByKeywordCategory(keyword, null, pageNum, pageSize, orderBy);
+    }
+
+
+
+
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
