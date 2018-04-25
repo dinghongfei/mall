@@ -1,8 +1,7 @@
 package com.mall.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,9 +11,8 @@ import java.util.Properties;
  * properties文件处理工具类
  * @author dhf
  */
+@Slf4j
 public class PropertiesUtil {
-
-    private static final Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
 
     private static Properties props;
 
@@ -24,7 +22,7 @@ public class PropertiesUtil {
         try {
             props.load(new InputStreamReader(PropertiesUtil.class.getClassLoader().getResourceAsStream(fileName),"UTF-8"));
         } catch (IOException e) {
-            logger.error("配置文件读取异常",e);
+            log.error("配置文件读取异常",e);
         }
     }
 
@@ -43,6 +41,38 @@ public class PropertiesUtil {
         }
         return value.trim();
     }
+
+    public static Integer getIntegerPropertry(String key){
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            return null;
+        }
+        return Integer.valueOf(value.trim());
+    }
+    public static Integer getIntegerPropertry(String key,Integer defaultValue){
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            return defaultValue;
+        }
+        return Integer.valueOf(value.trim());
+    }
+
+    public static Boolean getBooleanPropertry(String key){
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            return null;
+        }
+        return Boolean.valueOf(value.trim());
+    }
+    public static Boolean getBooleanPropertry(String key,Boolean defaultValue){
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            return defaultValue;
+        }
+        return Boolean.valueOf(value.trim());
+    }
+
+
 
 
 

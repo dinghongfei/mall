@@ -8,7 +8,12 @@
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="com.mall" annotation-config="true"/>
+    <!--springMVC配置文件-->
+
+    <!-- use-default-filters="false"关闭默认扫描，只扫描白名单里面的controller -->
+    <context:component-scan base-package="com.mall.controller" annotation-config="true" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <mvc:annotation-driven>
         <mvc:message-converters>
@@ -38,6 +43,19 @@
         <property name="maxInMemorySize" value="4096" />
         <property name="defaultEncoding" value="UTF-8"></property>
     </bean>
+
+    <!--二期:拦截器-->
+    <mvc:interceptors>
+        <!--定义在这里的，都会拦截，这里是只拦截manage请求路径下的-->
+        <mvc:interceptor>
+            <mvc:mapping path="/manage/**"/>
+            <!--这个exclude需设置，login.do请求不需要拦截，这里使用代码实现的方式，具体见自定义拦截器类AuthorityInterceptor-->
+            <!--<mvc:exclude-mapping path="/manage/user/login.do"/>-->
+            <bean class="com.mall.controller.common.interceptor.AuthorityInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
 
 
 </beans>

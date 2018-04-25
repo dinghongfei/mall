@@ -2,11 +2,11 @@ package com.mall.service.impl;
 
 import com.mall.common.Const;
 import com.mall.common.ServerResponse;
-import com.mall.common.TokenCache;
 import com.mall.dao.UserMapper;
 import com.mall.pojo.User;
 import com.mall.service.IUserService;
 import com.mall.util.MD5Util;
+import com.mall.util.RedisShardedPoolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -101,7 +101,10 @@ public class UserServiceImpl implements IUserService {
         if (resultCount > 0) {
             //问题是此用户的，并且答案是正确的
             String forgetToken = UUID.randomUUID().toString();
-            TokenCache.setKey(TokenCache.TOKEN_PREFIX + username,forgetToken);
+            //TokenCache.setKey(TokenCache.TOKEN_PREFIX + username,forgetToken);
+            RedisShardedPoolUtil.setEx(Const.TOKEN_PREFIX + username, forgetToken, 60 * 60 * 12);
+
+
             return ServerResponse.createBySuccess(forgetToken);
         }
         return ServerResponse.createByErrorMessage("问题答案错误");
@@ -116,7 +119,9 @@ public class UserServiceImpl implements IUserService {
         if (validResponse.isSuccess()) {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
-        String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX + username);
+        //String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX + username);
+        String token = RedisShardedPoolUtil.get(Const.TOKEN_PREFIX + username);
+
         if (StringUtils.isBlank(token)) {
             return ServerResponse.createByErrorMessage("token无效或者过期");
         }
@@ -135,7 +140,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public ServerResponse<String> resetPassword(String passwordOld, String passwordNew, User user) {
-        //防止横向越权，要校验一下这个用户的旧密码，一定要指定这个用户，因为我们回查询一个count(1)，如果不指定id，那么结果就是true，count>0
+        //防止横向越权，要校验一下这个用户的旧密码，一定要指定这个用户，
+        // 因为我们会查询一个count(1)，而两个用户的md5密码可能是一样的，这是就会返回大于的的值
         int resultCount = userMapper.checkPassword(MD5Util.MD5EncodeUtf8(passwordOld),user.getId());
         if (resultCount == 0) {
             return ServerResponse.createByErrorMessage("旧密码错误");
