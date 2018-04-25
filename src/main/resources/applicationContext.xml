@@ -9,9 +9,16 @@
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package="com.mall" annotation-config="true"/>
 
-    <!--<context:annotation-config/>-->
+    <!--spirng配置文件-->
+
+
+    <!-- 二期：扫描所有bean，除去controller注解 -->
+    <context:component-scan base-package="com.mall" annotation-config="true">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--<context:annotation-config/> 此注解的作用是对已经注册的bean进行处理，使之可以工作，但是上面已经包含annotation-config="true"了，所以此注解可以取消-->
     <aop:aspectj-autoproxy/>
 
 
