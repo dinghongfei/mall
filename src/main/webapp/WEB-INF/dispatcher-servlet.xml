@@ -44,5 +44,18 @@
         <property name="defaultEncoding" value="UTF-8"></property>
     </bean>
 
+    <!--二期:拦截器-->
+    <mvc:interceptors>
+        <!--定义在这里的，都会拦截，这里是只拦截manage请求路径下的-->
+        <mvc:interceptor>
+            <mvc:mapping path="/manage/**"/>
+            <!--这个exclude需设置，login.do请求不需要拦截，这里使用代码实现的方式，具体见自定义拦截器类AuthorityInterceptor-->
+            <!--<mvc:exclude-mapping path="/manage/user/login.do"/>-->
+            <bean class="com.mall.controller.common.interceptor.AuthorityInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+
 
 </beans>
