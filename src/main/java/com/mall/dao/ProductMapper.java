@@ -24,4 +24,9 @@ public interface ProductMapper {
 
     List<Product> selectByNameAndCategoryIds(@Param("productName")String productName,@Param("categoryIdList")List<Integer> categoryIdList);
 
+
+    //二期：
+    //此处用Integer，因为int无法为null，有可能有些商品已经删除
+    Integer selectStockByProductId(Integer id);
+
 }

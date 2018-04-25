@@ -30,6 +30,7 @@ import com.mall.vo.ShippingVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -563,6 +564,33 @@ public class OrderServiceImpl implements IOrderService {
             }
         }
         return ServerResponse.createByErrorMessage("订单不存在");
+    }
+
+    @Override
+    public void closeOrder(int hour) {
+        Date closeDateTime = DateUtils.addHours(new Date(), -hour);
+        List<Order> orderList = orderMapper.selectOrderStatusByCreateTime(Const.OrderStatusEnum.NO_PAY.getCode(), DateTimeUtil.dateToStr(closeDateTime));
+        for (Order order : orderList) {
+            List<OrderItem> orderItemList = orderItemMapper.getByOrderNo(order.getOrderNo());
+            for (OrderItem orderItem : orderItemList) {
+                //where条件用主键，防止锁表，同时必须是支持MySQL的InnoDB
+                Integer stock = productMapper.selectStockByProductId(orderItem.getProductId());
+
+                //如已生成的订单里的商品被删除的情况
+                if (stock == null) {
+                    continue;
+                }
+
+                //这里new一个对象去更新，是因为只想更新stock，具体去看mapper里updateByPrimaryKeySelective的实现区别
+                Product product = new Product();
+                product.setId(orderItem.getProductId());
+                product.setStock(stock+orderItem.getQuantity());
+                productMapper.updateByPrimaryKeySelective(product);
+            }
+            //关闭order
+            orderMapper.closeOrderByOrderId(order.getId());
+            log.info("关闭订单OrderNo:{}",order.getOrderNo());
+        }
     }
 
 
